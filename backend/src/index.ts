@@ -2,12 +2,14 @@ import express from "express";
 import { connectDatabase } from "./Utils/database";
 import { UserModel } from "./model/User";
 import auth from "./router/User";
+import cors from "cors";
 const PORT = 8000;
 
 const start = () => {
   const app = express();
   app.use(express.json());
   app.use("/auth", auth);
+  app.use(cors());
   connectDatabase();
   app.get("/", (req, res) => {
     res.status(200).send({ UserModel, success: true, message: "hello world" });

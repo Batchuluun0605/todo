@@ -6,11 +6,10 @@ type SignUpType = {
   password: string;
   avatarImage: Buffer;
 };
-// type LogInType = {
-//   username: string;
-//   password: string;
-//   avatarImage: Buffer;
-// };
+type LogInType = {
+  username: string;
+  password: string;
+};
 export const signUp = async (req: Request, res: Response) => {
   try {
     const { username, password }: Required<SignUpType> = req.body;
@@ -33,17 +32,29 @@ export const signUp = async (req: Request, res: Response) => {
   }
 };
 export const LogIn = async (req: Request, res: Response) => {
-  const { username } = req.body;
   try {
-    const result = await UserModel.findOne({
+    const { username, password }: { username: string; password: string } =
+      req.body;
+
+    const user: LogInType | null = await UserModel.findOne({
       username: username,
     });
-    if (result) {
-      console.log("success");
+    console.log(user);
+
+    if (!user) {
+      return res.status(400).send({ success: false, msg: "User not found" });
     } else {
-      console.log("error");
+      bcrypt.compare(password, user.password, async function (err, result) {
+        if (!result) {
+          return res.send({
+            success: false,
+            msg: "Username or password incorrect",
+          });
+        } else {
+          return res.send({ success: true, user });
+        }
+      });
     }
-    res.send("ok");
   } catch (error) {
     console.log(error);
   }
