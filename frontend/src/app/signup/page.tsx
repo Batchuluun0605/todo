@@ -19,6 +19,11 @@ const SignUp = () => {
         username: username,
         password: password,
       });
+      if (createUser) {
+        setTimeout(() => {
+          router.push("/login");
+        }, 2000);
+      }
     } catch (error: any) {
       setError(error.msg);
     }

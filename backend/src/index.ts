@@ -3,6 +3,7 @@ import { connectDatabase } from "./Utils/database";
 import { UserModel } from "./model/User";
 import auth from "./router/User";
 import cors from "cors";
+import todo from "./router/Todo";
 const PORT = 8000;
 
 const start = () => {
@@ -11,6 +12,7 @@ const start = () => {
 
   app.use(express.json());
   app.use("/auth", auth);
+  app.use("/todo", todo);
   connectDatabase();
   app.get("/", (req, res) => {
     res.status(200).send({ UserModel, success: true, message: "hello world" });
