@@ -4,7 +4,7 @@ export const menus = [
     title: "Login",
   },
   {
-    link: "sign_up",
+    link: "signup",
     title: "Sign up",
   },
 ];

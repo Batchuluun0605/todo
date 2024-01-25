@@ -7,9 +7,10 @@ const PORT = 8000;
 
 const start = () => {
   const app = express();
+  app.use(cors());
+
   app.use(express.json());
   app.use("/auth", auth);
-  app.use(cors());
   connectDatabase();
   app.get("/", (req, res) => {
     res.status(200).send({ UserModel, success: true, message: "hello world" });

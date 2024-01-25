@@ -6,26 +6,31 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const SignUp = () => {
-  const BASE_URL = "http://localhost:8000/auth/signup";
+  // const BASE_URL = "http://localhost:8000/auth/signup";
 
   const router = useRouter();
-  const [input, setInput] = useState({
-    username: "",
-    password: "",
-  });
-  const submitHandler = async (req: Request, res: Response) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const submitHandler = async (e: any) => {
+    e.preventDefault();
     try {
-      const createUser = await axios.post(BASE_URL, { ...input });
-    } catch (error) {}
+      const createUser = await axios.post("http://localhost:8000/auth/signup", {
+        username: username,
+        password: password,
+      });
+    } catch (error: any) {
+      setError(error.msg);
+    }
   };
   const LoginPage = () => {
     router.push("/login");
   };
   return (
-    <div className=" bg-orange-600">
-      {input && input.password}
-      <div className="w-[400px] m-auto py-52 px-10 flex flex-col gap-4">
+    <div className=" bg-orange-600 h-screen">
+      <div className="w-[400px] m-auto py-72 px-10 flex flex-col gap-4">
         <Title size={SizeEnum.L}>Sign up</Title>
+        {error && <p className="text-red-600 my-2">{error}</p>}
         <form action="" className="flex flex-col gap-5">
           <label htmlFor="" className="flex flex-col gap-3">
             Username
@@ -33,9 +38,8 @@ const SignUp = () => {
               type="text"
               placeholder="Create your username"
               className="p-2 rounded-xl border"
-              onChange={(e) =>
-                setInput((prev) => ({ ...prev, username: e.target.value }))
-              }
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </label>
           <label htmlFor="" className="flex flex-col gap-3">
@@ -44,9 +48,8 @@ const SignUp = () => {
               type="password"
               placeholder="Create your password"
               className="p-2 rounded-xl border"
-              onChange={(e) =>
-                setInput((prev) => ({ ...prev, password: e.target.value }))
-              }
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </label>
         </form>
@@ -57,7 +60,7 @@ const SignUp = () => {
           </span>
         </p>
 
-        <Button>Sign up</Button>
+        <Button onClick={submitHandler}>Sign up</Button>
       </div>
     </div>
   );

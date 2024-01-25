@@ -28,7 +28,7 @@ const Page = () => {
 
       router.push("/dashboard");
     } catch (error: any) {
-      setError(error.response.data.msg);
+      setError(error.msg);
     }
   };
   const SignUpPage = () => {
@@ -36,8 +36,8 @@ const Page = () => {
   };
 
   return (
-    <div className=" bg-orange-600">
-      <div className="max-w-[400px]  m-auto py-52 px-10 flex flex-col gap-4">
+    <div className=" bg-orange-600 h-screen">
+      <div className="max-w-[400px]  m-auto py-72 px-10 flex flex-col gap-4">
         <Title size={SizeEnum.L}>Login</Title>
         {error && <p className="text-red-600 my-2">{error}</p>}
 
