@@ -9,13 +9,12 @@ import { Request, Response } from "express";
 // };
 export const createTodo = async (req: Request, res: Response) => {
   try {
-    const { title, userId, description, priority, label } = req.body;
+    const { title, userId, description, priority } = req.body;
     const createTodos = await TodoModel.create({
       title,
       userId,
       description,
       priority,
-      label,
     });
     console.log(createTodos);
 
@@ -29,7 +28,7 @@ export const getAllTodo = async (req: Request, res: Response) => {
     // const { userId } = req.body;
     const getAllTodos = await TodoModel.find();
     console.log(getAllTodos);
-    return res.status(200).send({ success: true, getAllTodos });
+    return res.status(200).send(getAllTodos);
   } catch (error) {
     return res.status(400).send({ success: false, error });
   }
