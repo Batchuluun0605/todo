@@ -4,26 +4,27 @@ import { useRouter } from "next/navigation";
 import SignOut from "../icon/SignOut";
 import SwitchTab from "../components/SwitchTab";
 import Board, { ColorEnum } from "../components/Board";
+import Card from "../components/Card";
 const Page = () => {
-  const router = useRouter();
-  useEffect(() => {
-    const rawJson: string | null = localStorage.getItem("user");
-    const user = rawJson && JSON.parse(rawJson);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   const rawJson: string | null = localStorage.getItem("user");
+  //   const user = rawJson && JSON.parse(rawJson);
 
-    if (!user) {
-      router.push("/login");
-      return;
-    }
+  //   if (!user) {
+  //     router.push("/login");
+  //     return;
+  //   }
 
-    const { _id, username, password } = user;
+  //   const { _id, username, password } = user;
 
-    if (!_id || !username || !password) {
-      router.push("/login");
-      return;
-    }
-  }, []);
+  //   if (!_id || !username || !password) {
+  //     router.push("/login");
+  //     return;
+  //   }
+  // }, []);
   return (
-    <div className=" bg-slate-300 h-screen flex">
+    <div className=" bg-slate-100 h-screen flex">
       <div className="w-[300px] bg-white flex flex-col gap-4 h-screen py-10 px-6">
         <h1>Todo App</h1>
         <div className="border-b"></div>
@@ -45,6 +46,7 @@ const Page = () => {
           <Board color={ColorEnum.BLUE}>In Progress</Board>
           <Board color={ColorEnum.GREEN}>Completed</Board>
         </div>
+        <Card />
       </div>
     </div>
   );
