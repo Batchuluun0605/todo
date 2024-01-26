@@ -1,11 +1,16 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
+interface Storage {
+  getItem(key: string): string | null;
+}
 const api = "http://localhost:8000/todo";
 const Task = () => {
+  const user: string | null = localStorage.getItem("user");
+  const id = user && JSON.parse(user);
   const [input, setInput] = useState({
     title: "",
-    userId: "65b1d0d6886cb3adf43a365c",
+    userId: id._id,
     description: "",
     priority: "",
     label: "",
@@ -13,13 +18,14 @@ const Task = () => {
   const submitHandler = async () => {
     try {
       const { data } = await axios.post(api, { ...input });
+
       console.log(data);
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="border rounded-xl bg-orange-600 p-4">
+    <div className="border rounded-xl bg-orange-600 p-4 flex flex-col gap-2">
       <div className="flex flex-col gap-2">
         Title
         <input

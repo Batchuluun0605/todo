@@ -1,9 +1,9 @@
 "use client";
-import { Button } from "../components/Button";
-import { SizeEnum, Title } from "../components/Title";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button } from "../components/Button";
+import { SizeEnum, Title } from "../components/Title";
 
 const Page = () => {
   const router = useRouter();
@@ -23,10 +23,13 @@ const Page = () => {
       const { data } = await axios.post(BASE_URL, {
         ...input,
       });
-
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      router.push("/dashboard");
+      if (data) {
+        router.push(`/dashboard/${data.user.username}`);
+      } else {
+        setError("username or password error");
+      }
     } catch (error: any) {
       setError(error.msg);
     }
@@ -39,7 +42,7 @@ const Page = () => {
     <div className=" bg-orange-600 h-screen">
       <div className="max-w-[400px]  m-auto py-72 px-10 flex flex-col gap-4">
         <Title size={SizeEnum.L}>Login</Title>
-        {error && <p className="text-red-600 my-2">{error}</p>}
+        {error && <p className="text-red-600 ">{error}</p>}
 
         <form className="flex flex-col gap-4">
           <label className="flex flex-col gap-3">

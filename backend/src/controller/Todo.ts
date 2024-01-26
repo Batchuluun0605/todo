@@ -16,7 +16,6 @@ export const createTodo = async (req: Request, res: Response) => {
       description,
       priority,
     });
-    console.log(createTodos);
 
     return res.status(200).send({ success: true, createTodos });
   } catch (error) {
@@ -27,7 +26,6 @@ export const getAllTodo = async (req: Request, res: Response) => {
   try {
     // const { userId } = req.body;
     const getAllTodos = await TodoModel.find();
-    console.log(getAllTodos);
     return res.status(200).send(getAllTodos);
   } catch (error) {
     return res.status(400).send({ success: false, error });

@@ -1,7 +1,8 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import Card from "../components/Card";
-import AddButton from "./AddButton";
+
 import Task from "./Task";
+import { Button } from "./Button";
 export enum ColorEnum {
   YELLOW,
   BLUE,
@@ -12,6 +13,10 @@ type BoardType = {
   color: ColorEnum;
 };
 const Board = ({ children, color }: BoardType) => {
+  const [isOpen, setOpen] = useState(false);
+  const handlerOpen = () => {
+    setOpen(!isOpen);
+  };
   return (
     <div className=" gap-3 w-[400px] bg-gray-300 h-fit flex flex-col py-6 px-6 ">
       <p
@@ -23,8 +28,8 @@ const Board = ({ children, color }: BoardType) => {
         <span>{children}</span>
       </p>
       <Card />
-      <AddButton />
-      <Task />
+      <Button onClick={handlerOpen}>Add task +</Button>
+      {isOpen && <Task />}
     </div>
   );
 };

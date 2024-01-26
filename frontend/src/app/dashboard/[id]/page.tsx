@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import SignOut from "../icon/SignOut";
-import SwitchTab from "../components/SwitchTab";
-import Board, { ColorEnum } from "../components/Board";
-import Card from "../components/Card";
+import SignOut from "../../icon/SignOut";
+import SwitchTab from "../../components/SwitchTab";
+import Board, { ColorEnum } from "../../components/Board";
+import Card from "../../components/Card";
 const Page = () => {
   // const router = useRouter();
   // useEffect(() => {
@@ -46,7 +46,6 @@ const Page = () => {
           <Board color={ColorEnum.BLUE}>In Progress</Board>
           <Board color={ColorEnum.GREEN}>Completed</Board>
         </div>
-        <Card />
       </div>
     </div>
   );

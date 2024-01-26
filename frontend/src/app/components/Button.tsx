@@ -14,9 +14,10 @@ export const Button = ({ children, onClick, variant }: ButtonProps) => {
     <button
       onClick={onClick}
       className={`py-2 px-4 rounded-md 
-      w-[100px]
+      
       bg-gray-900
       text-white
+      w-full
       m-auto
       ${variant === "ghost" && "bg-gray-100 text-gray-700"}
       ${

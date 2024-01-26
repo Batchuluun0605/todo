@@ -8,7 +8,9 @@ type CardType = {
   label: string;
 };
 const Card = () => {
-  const api = "http://localhost:8000/todo";
+  const user: string | null = localStorage.getItem("user");
+  const id = user && JSON.parse(user);
+  const api = `http://localhost:8000/todo?userId=${id._id}`;
   const [data, setData] = useState([]);
   const handler = async () => {
     try {
@@ -19,9 +21,9 @@ const Card = () => {
     }
   };
 
-  // useEffect(() => {
-  //   handler();
-  // });
+  useEffect(() => {
+    handler();
+  });
 
   return (
     <div>
@@ -34,13 +36,12 @@ const Card = () => {
             <h2 className="text-2xl font-semibold">{el.title}</h2>
             <p className="text-xl ">{el.description}</p>
             <div className="flex gap-2">
-              <Label>el.priority</Label>
+              <Label>{el.priority}</Label>
               <p className=" bg-blue-700 px-2 py-1 w-fit rounded-lg ">App</p>
             </div>
           </div>
         ))}
       </header>
-      <button onClick={handler}>hh</button>
     </div>
   );
 };

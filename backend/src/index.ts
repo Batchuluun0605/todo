@@ -1,7 +1,7 @@
 import express from "express";
 import { connectDatabase } from "./Utils/database";
 import { UserModel } from "./model/User";
-// import auth from "./router/User";
+import auth from "./router/User";
 import cors from "cors";
 import todo from "./router/Todo";
 const PORT = 8000;
@@ -11,7 +11,7 @@ const start = () => {
   app.use(cors({ origin: "*" }));
 
   app.use(express.json());
-  // app.use("/auth", auth);
+  app.use("/auth", auth);
   app.use("/todo", todo);
   connectDatabase();
   app.get("/", (req, res) => {
