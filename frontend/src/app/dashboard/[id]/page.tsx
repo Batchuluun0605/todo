@@ -28,7 +28,7 @@ const Page = () => {
       <div className="w-[300px] bg-white flex flex-col gap-4 h-screen py-10 px-6">
         <h1>Todo App</h1>
         <div className="border-b"></div>
-        <div className="border p-1 bg-slate-400 flex gap-1 rounded w-1/2">
+        <div className="border p-1 bg-slate-400 flex gap-3 rounded w-1/2">
           <p>Sign out</p>
           <SignOut />
         </div>

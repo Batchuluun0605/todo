@@ -15,7 +15,8 @@ const Card = () => {
   const handler = async () => {
     try {
       const res = await axios.get(api);
-      setData(res.data);
+      const data = res.data;
+      setData(data.filter((el: any) => el.userId === id._id));
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +38,7 @@ const Card = () => {
             <p className="text-xl ">{el.description}</p>
             <div className="flex gap-2">
               <Label>{el.priority}</Label>
-              <p className=" bg-blue-700 px-2 py-1 w-fit rounded-lg ">App</p>
+              <p className=" bg-blue-400 px-2 py-1 w-fit rounded-lg ">App</p>
             </div>
           </div>
         ))}

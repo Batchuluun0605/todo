@@ -5,7 +5,7 @@ type LabelType = {
 const Label = ({ children }: LabelType) => {
   return (
     <div>
-      <p className=" bg-orange-700 px-2 py-1 w-fit rounded-xl">{children}</p>
+      <p className=" bg-yellow-400 px-2 py-1 w-fit rounded-xl">{children}</p>
     </div>
   );
 };

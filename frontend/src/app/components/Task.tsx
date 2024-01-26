@@ -25,7 +25,7 @@ const Task = () => {
     }
   };
   return (
-    <div className="border rounded-xl bg-orange-600 p-4 flex flex-col gap-2">
+    <div className="border rounded-xl bg-orange-600 p-4 w-[300px] h-fit flex flex-col gap-2 ">
       <div className="flex flex-col gap-2">
         Title
         <input
